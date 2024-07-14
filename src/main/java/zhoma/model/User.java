@@ -23,7 +23,7 @@ public class User {
 
     private String name;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Book> borrowedBooks;
 

@@ -3,6 +3,7 @@ package zhoma.serveces;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import zhoma.DTO.BookRequest;
+import zhoma.exceptions.BookNotFoundException;
 import zhoma.model.Book;
 import zhoma.repositories.BookRepository;
 
@@ -34,5 +35,10 @@ public class BookService {
 
     public Optional<Book> getByID(int bookID) {
         return repository.findById(bookID);
+    }
+
+    public void deleteBookByID(int id) {
+        repository.findById(id).orElseThrow(()-> new BookNotFoundException("Book with this id = "+ id + " doesn't exist !!!"));
+        repository.deleteById(id);
     }
 }

@@ -21,6 +21,22 @@ public class LibraryController {
 
     private final LibraryService libraryService;
 
+    @GetMapping()
+    public List<String> allServices() {
+        return List.of(
+                "addbook",
+                "adduser",
+                "allusers",
+                "allbooks",
+                "borrowbook",
+                "returnbook",
+                "allAvailableBooks",
+                "allNotAvailableBooks",
+                "userdelete",
+                "bookdelete"
+        );
+    }
+
 
     @PostMapping("/addbook")
     public ResponseEntity<String> addBook(@RequestBody BookRequest request) {
@@ -57,8 +73,28 @@ public class LibraryController {
     }
 
     @GetMapping("/allAvailableBooks")
-    public List<Book> allAvailableBooks(){
+    public List<Book> AllAvailableBooks(){
         return libraryService.getAllAvailableBooks();
     }
+
+    @GetMapping("/allNotAvailableBooks")
+    public List<Book> allNotAvailableBooks(){
+        return libraryService.getAllNotAvailableBooks();
+    }
+
+    @DeleteMapping("/userdelete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable(name = "id")int id){
+        libraryService.deleteUser(id);
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully !!!");
+    }
+
+
+    @DeleteMapping("/bookdelete/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable(name = "id")int id){
+        libraryService.deleteBook(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Book deleted successfully !!!");
+    }
+
+
 
 }

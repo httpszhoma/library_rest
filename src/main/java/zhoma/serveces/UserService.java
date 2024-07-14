@@ -3,6 +3,7 @@ package zhoma.serveces;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import zhoma.DTO.UserRequest;
+import zhoma.exceptions.UserNotFoundException;
 import zhoma.model.User;
 import zhoma.repositories.UserRepository;
 
@@ -31,4 +32,9 @@ public class UserService {
  public Optional<User> getByID(Integer id){
        return repository.findById(id);
  }
+
+    public void deleteUserByID(int id) {
+        repository.findById(id).orElseThrow(() -> new UserNotFoundException("User with this id = "+ id + " doesn't exist !!!"));
+        repository.deleteById(id);
+    }
 }

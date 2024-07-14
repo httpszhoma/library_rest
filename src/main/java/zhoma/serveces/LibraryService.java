@@ -91,4 +91,25 @@ public class LibraryService {
 
         return availableBooks;
     }
+    public List<Book> getAllNotAvailableBooks() {
+        List<Book> bookList = bookService.getAll();
+        List<Book> notavailableBooks = new ArrayList<>();
+
+        for (Book book : bookList) {
+            if (!book.isAvailable()) {
+                notavailableBooks.add(book);
+            }
+        }
+
+        return notavailableBooks;
+    }
+
+    public void deleteUser(int id) {
+        userService.deleteUserByID(id);
+
+    }
+
+    public void deleteBook(int id) {
+        bookService.deleteBookByID(id);
+    }
 }
