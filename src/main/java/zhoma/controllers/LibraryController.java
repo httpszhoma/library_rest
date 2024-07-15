@@ -94,6 +94,11 @@ public class LibraryController {
         libraryService.deleteBook(id);
         return ResponseEntity.status(HttpStatus.OK).body("Book deleted successfully !!!");
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable(name = "id")int id,@RequestBody UserRequest request){
+        libraryService.updateUser(request,id);
+        return ResponseEntity.status(HttpStatus.OK).body("User updated successfully !!!");
+    }
 
 
 

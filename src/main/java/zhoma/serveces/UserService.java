@@ -37,4 +37,11 @@ public class UserService {
         repository.findById(id).orElseThrow(() -> new UserNotFoundException("User with this id = "+ id + " doesn't exist !!!"));
         repository.deleteById(id);
     }
+
+    public void updateUser(UserRequest request, int id) {
+        Optional<User> userOptional = repository.findById(id);
+        userOptional.orElseThrow(() -> new UserNotFoundException("User with this id = "+ id + " doesn't exist !!!"));
+        userOptional.get().setName(request.getName());
+       repository.save(userOptional.get());
+    }
 }
